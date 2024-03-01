@@ -1,0 +1,86 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+section {
+    padding: 40px;
+    text-align: center;
+    height: 100vh;
+    z-index: 999;
+}
+/* Light Theme Colors */
+body.light-theme #home {
+    background-color: #f2f2f2;
+}
+
+body.light-theme #about {
+    background-color: #e6e6e6;
+}
+
+body.light-theme #projects {
+    background-color: #d9d9d9;
+}
+
+body.light-theme #skills {
+    background-color: #cccccc;
+}
+
+body.light-theme #education {
+    background-color: #bfbfbf;
+}
+
+body.light-theme #contact {
+    background-color: #963434;
+}
+
+/* Dark Theme Colors */
+body.dark-theme #home {
+    background-color: #333;
+}
+
+body.dark-theme #about {
+    background-color: #444;
+}
+
+body.dark-theme #projects {
+    background-color: #555;
+}
+
+body.dark-theme #skills {
+    background-color: #666;
+}
+
+body.dark-theme #education {
+    background-color: #777;
+}
+
+body.dark-theme #contact {
+    background-color: #888;
+}
+
+/* Additional Styling for Differentiation */
+#home {
+    border-top: 5px solid #ff6262; /* Border color for home section */
+}
+
+#about {
+    border-top: 5px solid #ffae42; /* Border color for about section */
+}
+
+#projects {
+    border-top: 5px solid #5e5e5e; /* Border color for projects section */
+}
+
+#skills {
+    border-top: 5px solid #46a049; /* Border color for skills section */
+}
+
+#education {
+    border-top: 5px solid #8c8c8c; /* Border color for education section */
+}
+
+#contact {
+    border-top: 5px solid #337ab7; /* Border color for contact section */
+}
