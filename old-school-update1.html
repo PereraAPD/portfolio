@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Times New Roman", serif;
+        background-color: #e0e0e0;
+        overflow: hidden;
+        transition: background-color 0.3s;
+      }
+      .section {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: background-color 0.3s;
+      }
+      .old-website {
+        width: 100vw;
+        height: 100vh;
+        max-width: 100%;
+        max-height: 100%;
+        background-color: #f0f0f0;
+        border: 3px solid black;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 5px 5px 0 black;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+      td {
+        padding: 15px;
+        border: 1px solid black;
+        text-align: center;
+        background-color: #f9f9f9;
+      }
+      td a {
+        color: blue;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      td img {
+        transition: transform 0.2s;
+      }
+      td img:hover {
+        transform: scale(1.1);
+      }
+      a {
+        color: blue;
+        text-decoration: underline;
+      }
+      marquee {
+        font-size: 18px;
+        font-weight: bold;
+        color: red;
+      }
+      button {
+        border: 2px outset gray;
+        font-family: Arial;
+        background-color: lightgray;
+        padding: 5px 10px;
+        cursor: pointer;
+      }
+      .hit-counter {
+        margin-top: 10px;
+      }
+      .circle-icons {
+        display: flex;
+        gap: 20px;
+      }
+      .icon {
+        position: relative;
+        cursor: pointer;
+        font-size: 40px;
+        transition: transform 0.3s, color 0.3s;
+      }
+      .icon:hover {
+        transform: scale(1.2);
+      }
+      .thought-bubble {
+        position: absolute;
+        background-color: #ffff00;
+        border: 2px solid #ff00ff;
+        padding: 10px;
+        border-radius: 15px;
+        font-size: 18px;
+        font-weight: bold;
+        cursor: pointer;
+        z-index: 1000;
+        box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+      }
+      .arrow {
+        position: absolute;
+        top: -10px;
+        left: 20px;
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+        border-bottom: 10px solid #ffff00;
+        z-index: -1;
+      }
+      .music {
+        top: 20px;
+        left: 50px;
+      }
+      .code {
+        top: 80px;
+        left: 150px;
+      }
+      .art {
+        top: 140px;
+        left: 100px;
+      }
+      .dock {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 15px;
+        background: rgba(255, 255, 255, 0.8);
+        padding: 10px 20px;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      }
+      .dock img {
+        width: 50px;
+        height: 50px;
+        transition: transform 0.2s;
+      }
+      .dock img:hover {
+        transform: scale(1.5);
+      }
+      .modal {
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: none;
+      }
+      .modal-content {
+        background-color: white;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 600px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      }
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+      .center-text {
+        text-align: center;
+      }
+      .blinking {
+        color: blue;
+        font-weight: bold;
+        animation: blink 1s infinite alternate;
+      }
+      @keyframes blink {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+      .loading-bar {
+        width: 50%;
+        height: 10px;
+        background-color: lightgray;
+        border: 2px solid black;
+        margin-top: 10px;
+        position: relative;
+      }
+      .loading-bar::after {
+        content: "";
+        width: 30%;
+        height: 100%;
+        background-color: blue;
+        position: absolute;
+        animation: load 3s infinite alternate;
+      }
+      @keyframes load {
+        from {
+          left: 0;
+        }
+        to {
+          left: 70%;
+        }
+      }
+      .gif-section {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: black;
+        position: relative;
+      }
+      .gif-container {
+        position: relative;
+      }
+      .colorful {
+        background: linear-gradient(
+          45deg,
+          #ff6b6b,
+          #f7d94c,
+          #6bff6b,
+          #6bb3ff,
+          #ff6bb3
+        ); /* Vibrant gradient */
+        color: white; /* Change text color for better contrast */
+      }
+      .colorful h1,
+      .colorful h3,
+      .colorful p {
+        color: #fff; /* Ensure headings and paragraphs are bright */
+      }
+      .colorful .marquee-box {
+        background-color: rgba(
+          255,
+          255,
+          255,
+          0.8
+        ); /* Semi-transparent background for marquee box */
+        border: 2px solid #fff; /* White border for contrast */
+      }
+      .colorful button {
+        background-color: #ff6b6b; /* Bright button color */
+        color: white; /* Button text color */
+      }
+      .colorful .thought-bubble {
+        background-color: #ff69b4; /* Bright thought bubble color */
+        border: 2px solid #00ff00; /* Bright border */
+      }
+      .colorful .icon:hover {
+        color: #00ff00;
+      }
+      .marquee-box {
+        display: inline-block;
+        background-color: #f0f0f0;
+        border: 2px solid black;
+        padding: 5px;
+        border-radius: 5px;
+      }
+      .warning-sign {
+        width: 100px; /* Set width for square shape */
+        height: 100px; /* Set height for square shape */
+        background-color: yellow; /* Background color for warning sign */
+        color: red; /* Text color */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid red; /* Border to enhance warning appearance */
+        border-radius: 10px; /* Optional: rounded corners */
+        font-size: 24px; /* Adjust font size */
+        margin: 0 auto; /* Center the warning sign */
+      }
+      .collage-section {
+        max-height: 80vh; /* Set a maximum height for the section */
+        overflow-y: auto; /* Enable vertical scrolling */
+        overflow-x: hidden; /* Prevent horizontal scrolling */
+        padding: 10px; /* Optional: Add some padding */
+        border: 1px solid #ccc; /* Optional: Add a border for better visibility */
+        background-color: #f9f9f9; /* Optional: Background color for the section */
+      }
+    </style>
+  </head>
+  <body>
+    <button id="theme-toggle" onclick="toggleTheme()">
+      Switch to Colorful Theme
+    </button>
+
+    <div class="section old-website">
+      <h1>Welcome to My Portfolio</h1>
+      <h3>Best viewed on Internet Explorer 5.0</h3>
+      <div class="marquee-box">
+        <marquee>🚧 Under Construction</marquee>
+      </div>
+
+      <div class="circle-icons" style="margin-top: 20px">
+        <div
+          class="icon"
+          onclick="showThoughtBubble(this, 'Search functionality coming soon!', 'search-icon.png')"
+        >
+          🔍
+        </div>
+        <div
+          class="icon"
+          onclick="showThoughtBubble(this, 'File management feature in development!', 'file-icon.png')"
+        >
+          📁
+        </div>
+        <div
+          class="icon"
+          onclick="showThoughtBubble(this, 'Contact form will be available soon!', 'contact-icon.png')"
+        >
+          📧
+        </div>
+      </div>
+
+      <div id="thought-bubble" class="thought-bubble" style="display: none">
+        <div class="arrow"></div>
+        <img id="thought-bubble-icon" src="" alt="Icon" />
+        <p id="thought-bubble-text"></p>
+      </div>
+
+      <div class="section collage-section">
+        <tr>
+          <td><a href="#">Home</a></td>
+          <td><a href="#">Projects</a></td>
+          <td><a href="#">Contact</a></td>
+          <td><a href="#">About Me</a></td>
+        </tr>
+        <tr>
+          <td><img src="icon-home.png" alt="Home Icon" /></td>
+          <td><img src="icon-projects.png" alt="Projects Icon" /></td>
+          <td><img src="icon-contact.png" alt="Contact Icon" /></td>
+          <td><img src="icon-about.png" alt="About Me Icon" /></td>
+        </tr>
+        <tr>
+          <td style="width: 25%; max-width: 150px">
+            <h3>Random Video</h3>
+            <video width="100%" controls>
+              <source src="your-video.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </td>
+          <td style="width: 25%; max-width: 150px">
+            <h3>Random Image 1</h3>
+            <img src="random-image1.jpg" alt="Random 1" style="width: 100%" />
+          </td>
+          <td style="width: 25%; max-width: 150px">
+            <h3>Random Text</h3>
+            <p>This is some random text to fill the space.</p>
+          </td>
+          <td style="width: 25%; max-width: 150px">
+            <h3>Random Image 2</h3>
+            <img src="random-image2.jpg" alt="Random 2" style="width: 100%" />
+          </td>
+        </tr>
+        <tr>
+          <td style="width: 25%; max-width: 150px">
+            <h3>Random Image 3</h3>
+            <img src="random-image3.jpg" alt="Random 3" style="width: 100%" />
+          </td>
+          <td style="width: 25%; max-width: 150px">
+            <h3>Random Video 2</h3>
+            <video width="100%" controls>
+              <source src="your-video2.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </td>
+          <td style="width: 25%; max-width: 150px">
+            <h3>Random Text 2</h3>
+            <p>Here's another piece of random text.</p>
+          </td>
+          <td style="width: 25%; max-width: 150px">
+            <h3>Random Image 4</h3>
+            <img src="random-image4.jpg" alt="Random 4" style="width: 100%" />
+          </td>
+        </tr>
+        <tr>
+          <td colspan="4" class="center-text">
+            <marquee>🚧 Explore my work and get in touch! 🚧</marquee>
+          </td>
+        </tr>
+      </div>
+
+      <p>Oops! Some images are missing...</p>
+      <img src="#" alt="Broken Image" />
+      <img src="#" alt="404 Not Found" />
+
+      <p>Click the button below if you're stuck:</p>
+      <button onclick="alert('You clicked an old-school button!')">
+        Click Me
+      </button>
+
+      <div class="hit-counter">
+        <p>Visitor Count:</p>
+        <img
+          src="https://www.animatedimages.org/data/media/710/animated-hit-counter-image-0013.gif"
+          alt="Hit Counter"
+        />
+      </div>
+
+      <p class="blinking">Last Updated: June 6, 1999</p>
+
+      <div class="loading-bar"></div>
+    </div>
+
+    <div class="section gif-section">
+      <div class="gif-container">
+        <img src="your-gif.gif" alt="Spinning GIF" />
+        <div class="thought-bubble music">🎵 Music</div>
+        <div class="thought-bubble code">💻 Code</div>
+        <div class="thought-bubble art">🎨 Art</div>
+      </div>
+    </div>
+
+    <div class="section macos-window">
+      <div class="dock">
+        <img
+          src="icon1.png"
+          alt="App 1"
+          onclick="openWindow('App 1 Info', 'This is the information for App 1.')"
+        />
+        <img
+          src="icon2.png"
+          alt="App 2"
+          onclick="openWindow('App 2 Info', 'This is the information for App 2.')"
+        />
+        <img
+          src="icon3.png"
+          alt="App 3"
+          onclick="openWindow('App 3 Info', 'This is the information for App 3.')"
+        />
+        <img
+          src="icon4.png"
+          alt="App 4"
+          onclick="openWindow('App 4 Info', 'This is the information for App 4.')"
+        />
+      </div>
+      <div id="modal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeWindow()">&times;</span>
+          <h2 id="modal-title"></h2>
+          <p id="modal-info"></p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let isColorful = false;
+
+      function toggleTheme() {
+        isColorful = !isColorful;
+        const body = document.body;
+        const themeButton = document.getElementById("theme-toggle");
+        const sections = document.querySelectorAll(".section"); // Select all sections
+
+        if (isColorful) {
+          body.classList.add("colorful");
+          sections.forEach((section) => section.classList.add("colorful")); // Add colorful class to all sections
+          themeButton.innerText = "Switch to Old School Theme";
+        } else {
+          body.classList.remove("colorful");
+          sections.forEach((section) => section.classList.remove("colorful")); // Remove colorful class from all sections
+          themeButton.innerText = "Switch to Colorful Theme";
+        }
+      }
+
+      function openWindow(title, info) {
+        document.getElementById("modal-title").innerText = title;
+        document.getElementById("modal-info").innerText = info;
+        document.getElementById("modal").style.display = "block"; // Show modal
+      }
+
+      function closeWindow() {
+        document.getElementById("modal").style.display = "none"; // Hide modal
+      }
+
+      function showThoughtBubble(element, message, iconSrc) {
+        const bubble = document.getElementById("thought-bubble");
+        const bubbleText = document.getElementById("thought-bubble-text");
+        const bubbleIcon = document.getElementById("thought-bubble-icon");
+
+        bubbleText.innerText = message;
+        bubbleIcon.src = iconSrc;
+
+        const rect = element.getBoundingClientRect();
+        bubble.style.left = `${rect.left + window.scrollX}px`;
+        bubble.style.top = `${rect.bottom + window.scrollY + 10}px`;
+
+        setTimeout(() => {
+          bubble.style.display = "block"; // Show bubble after a delay
+        }, 200); // Delay of 200ms
+
+        setTimeout(() => {
+          bubble.style.display = "none"; // Hide the bubble after 3 seconds
+        }, 3200); // Total time including delay
+      }
+    </script>
+  </body>
+</html>
